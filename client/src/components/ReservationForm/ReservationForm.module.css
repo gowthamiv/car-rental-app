@@ -1,0 +1,41 @@
+@reference "tailwindcss";
+
+.card {
+  @apply bg-white border border-gray-200 rounded-xl p-6 w-full sm:w-[380px] mx-auto;
+}
+
+.summary {
+  @apply bg-gray-50 rounded-md p-3 mb-4;
+}
+
+.summaryPrice {
+  @apply text-xl font-medium mt-1;
+}
+
+.field {
+  @apply mb-3;
+}
+
+.label {
+  @apply text-sm text-gray-500 block mb-1;
+}
+
+.input {
+  @apply w-full border border-gray-300 rounded-md px-3 py-2 text-sm;
+}
+
+.errorText {
+  @apply text-xs text-red-500 mt-1;
+}
+
+.actions {
+  @apply flex gap-2 mt-4;
+}
+
+.buttonSecondary {
+  @apply flex-1 border border-gray-300 rounded-md py-2 bg-white;
+}
+
+.buttonPrimary {
+  @apply flex-1 bg-blue-600 text-white border-none rounded-md py-2 font-medium;
+}

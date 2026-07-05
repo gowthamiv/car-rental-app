@@ -1,0 +1,41 @@
+@reference "tailwindcss";
+
+.wrapper {
+  @apply min-h-screen flex items-center justify-center bg-gray-50;
+}
+
+.card {
+  @apply bg-white border border-gray-200 rounded-xl p-8 w-[320px];
+}
+
+.iconCircle {
+  @apply w-11 h-11 rounded-full bg-blue-100 flex items-center justify-center mb-4;
+}
+
+.title {
+  @apply text-lg font-medium mb-1;
+}
+
+.subtitle {
+  @apply text-sm text-gray-500 mb-5;
+}
+
+.label {
+  @apply text-sm text-gray-500 block mb-1.5;
+}
+
+.input {
+  @apply w-full border border-gray-300 rounded-md px-3 py-2 text-sm mb-4;
+}
+
+.button {
+  @apply w-full bg-blue-600 text-white border-none rounded-md py-2 font-medium;
+}
+
+.button:disabled {
+  @apply bg-gray-300 cursor-not-allowed;
+}
+
+.errorText {
+  @apply text-sm text-red-500 mt-2;
+}

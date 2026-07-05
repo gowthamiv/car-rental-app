@@ -1,0 +1,57 @@
+@reference "tailwindcss";
+
+.wrapper {
+  @apply min-h-[70vh] flex items-center justify-center;
+}
+
+.card {
+  @apply bg-white border border-gray-200 rounded-xl p-6 w-[340px];
+}
+
+.iconCircle {
+  @apply w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-3;
+}
+
+.title {
+  @apply text-lg font-medium text-center mb-0.5;
+}
+
+.subtitle {
+  @apply text-sm text-gray-500 text-center;
+}
+
+.table {
+  @apply w-full text-sm border-t border-gray-200 mt-4 pt-3;
+}
+
+.tableRow td {
+  @apply py-1.5;
+}
+
+.tableLabel {
+  @apply text-gray-500;
+}
+
+.tableValue {
+  @apply text-right font-medium;
+}
+
+.totalRow {
+  @apply flex justify-between items-baseline border-t border-gray-200 mt-2 pt-3;
+}
+
+.totalPrice {
+  @apply text-2xl font-medium;
+}
+
+.actions {
+  @apply flex gap-2 mt-5;
+}
+
+.buttonSecondary {
+  @apply flex-1 border border-gray-300 rounded-md py-2 bg-white text-sm;
+}
+
+.buttonPrimary {
+  @apply flex-1 bg-blue-600 text-white border-none rounded-md py-2 text-sm font-medium;
+}

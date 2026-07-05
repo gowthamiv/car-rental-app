@@ -1,0 +1,69 @@
+@reference "tailwindcss";
+
+.wrapper {
+  @apply max-w-2xl mx-auto p-6;
+}
+
+.header {
+  @apply flex justify-between items-center mb-4;
+}
+
+.title {
+  @apply text-lg font-medium;
+}
+
+.newButton {
+  @apply bg-blue-600 text-white border-none rounded-md px-4 py-2 text-sm font-medium;
+}
+
+.list {
+  @apply bg-white border border-gray-200 rounded-xl overflow-hidden;
+}
+
+.row {
+  @apply flex items-center justify-between px-5 py-4 border-b border-gray-200 last:border-b-0;
+}
+
+.rowCancelled {
+  @apply opacity-60;
+}
+
+.rowLeft {
+  @apply flex items-center gap-3;
+}
+
+.iconCircle {
+  @apply w-9 h-9 rounded-full flex items-center justify-center;
+}
+
+.category {
+  @apply font-medium text-sm;
+}
+
+.dates {
+  @apply text-sm text-gray-500;
+}
+
+.rowRight {
+  @apply flex items-center gap-4;
+}
+
+.price {
+  @apply font-medium text-sm;
+}
+
+.statusActive {
+  @apply bg-green-100 text-green-700 text-xs px-3 py-1 rounded-md;
+}
+
+.statusCancelled {
+  @apply bg-gray-100 text-gray-500 text-xs px-3 py-1 rounded-md;
+}
+
+.linkButton {
+  @apply text-sm text-blue-600 bg-transparent border-none;
+}
+
+.emptyState {
+  @apply text-sm text-gray-500 text-center py-10;
+}

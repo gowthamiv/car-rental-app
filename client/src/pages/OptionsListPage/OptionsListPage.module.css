@@ -1,0 +1,41 @@
+@reference "tailwindcss";
+
+.wrapper {
+  @apply max-w-4xl mx-auto p-6;
+}
+
+.header {
+  @apply flex items-end gap-3 mb-6 flex-wrap;
+}
+
+.field {
+  @apply flex flex-col;
+}
+
+.label {
+  @apply text-sm text-gray-500 mb-1;
+}
+
+.input {
+  @apply border border-gray-300 rounded-md px-3 py-2 text-sm w-[150px];
+}
+
+.mileageInput {
+  @apply border border-gray-300 rounded-md px-3 py-2 text-sm w-[110px];
+}
+
+.updateButton {
+  @apply bg-blue-600 text-white border-none rounded-md px-4 py-2 text-sm font-medium;
+}
+
+.grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3;
+}
+
+.errorText {
+  @apply text-sm text-red-500 mb-4;
+}
+
+.emptyState {
+  @apply text-sm text-gray-500 text-center py-10;
+}

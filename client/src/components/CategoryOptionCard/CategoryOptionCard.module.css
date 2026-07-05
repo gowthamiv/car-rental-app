@@ -1,0 +1,33 @@
+@reference "tailwindcss";
+
+.card {
+  @apply bg-white border border-gray-200 rounded-xl p-4 flex flex-col;
+}
+
+.cardBestValue {
+  @apply border-2 border-blue-500;
+}
+
+.cardUnavailable {
+  @apply opacity-55;
+}
+
+.price {
+  @apply text-2xl font-medium mt-3 mb-0.5;
+}
+
+.priceDetail {
+  @apply text-sm text-gray-500 mb-3;
+}
+
+.availability {
+  @apply text-sm text-gray-400 mb-3;
+}
+
+.selectButton {
+  @apply w-full bg-blue-600 text-white border-none rounded-md py-2 font-medium;
+}
+
+.selectButton:disabled {
+  @apply bg-gray-200 text-gray-400 cursor-not-allowed;
+}

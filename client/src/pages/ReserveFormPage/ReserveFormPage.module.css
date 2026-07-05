@@ -1,0 +1,5 @@
+@reference "tailwindcss";
+
+.wrapper {
+  @apply min-h-[70vh] flex flex-col items-center justify-center gap-3;
+}

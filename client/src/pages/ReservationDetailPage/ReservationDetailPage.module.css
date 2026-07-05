@@ -1,0 +1,61 @@
+@reference "tailwindcss";
+
+.wrapper {
+  @apply max-w-md mx-auto p-6;
+}
+
+.card {
+  @apply bg-white border border-gray-200 rounded-xl p-6;
+}
+
+.title {
+  @apply text-lg font-medium mb-1;
+}
+
+.subtitle {
+  @apply text-sm text-gray-500 mb-4;
+}
+
+.field {
+  @apply mb-3;
+}
+
+.label {
+  @apply text-sm text-gray-500 block mb-1;
+}
+
+.input {
+  @apply w-full border border-gray-300 rounded-md px-3 py-2 text-sm;
+}
+
+.select {
+  @apply w-full border border-gray-300 rounded-md px-3 py-2 text-sm;
+}
+
+.priceBox {
+  @apply bg-gray-50 rounded-md p-3 my-4 flex justify-between items-baseline;
+}
+
+.priceNew {
+  @apply text-2xl font-medium;
+}
+
+.actions {
+  @apply flex gap-2 mt-2;
+}
+
+.buttonSecondary {
+  @apply flex-1 border border-gray-300 rounded-md py-2 bg-white text-sm;
+}
+
+.buttonPrimary {
+  @apply flex-1 bg-blue-600 text-white border-none rounded-md py-2 text-sm font-medium;
+}
+
+.cancelButton {
+  @apply w-full text-red-500 border border-red-200 rounded-md py-2 text-sm mt-3 bg-white;
+}
+
+.errorText {
+  @apply text-sm text-red-500 mt-2;
+}
