@@ -12,14 +12,13 @@ export function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: SubmitEvent) => {
+  const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
     try {
       const result = await requestOtp({ mobileNumber });
-      // result.otp only exists in dev mode (config.isDev on the backend) — undefined in production
       navigate('/verify-otp', { state: { mobileNumber, otp: result.otp } });
     } catch (err) {
       setError(extractErrorMessage(err));
@@ -52,7 +51,7 @@ export function LoginPage() {
           {loading ? 'Sending…' : 'Send code'}
         </button>
 
-        {error && <p className={styles.errorText} role="alert" aria-live="polite">{error}</p>}
+        {error && <p className={styles.errorText}>{error}</p>}
       </form>
     </div>
   );

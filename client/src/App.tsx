@@ -1,4 +1,3 @@
-// src/App.tsx
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthProvider';
 import { ReservationDraftProvider } from './context/ReservationDraftProvider';
@@ -13,12 +12,15 @@ import { ReserveFormPage } from './pages/ReserveFormPage/ReserveFormPage';
 import { ConfirmationPage } from './pages/ConfirmationPage/ConfirmationPage';
 import { MyReservationsPage } from './pages/MyReservationsPage/MyReservationsPage';
 import { ReservationDetailPage } from './pages/ReservationDetailPage/ReservationDetailPage';
+import { AppBackground } from './pages/AppBackground/AppBackground';
 
 function App() {
   return (
     <AuthProvider>
       <ReservationDraftProvider>
         <BrowserRouter>
+          <AppBackground />
+          <div style={{ position: 'relative', zIndex: 1 }}>
           <Header />
           <Routes>
             <Route path="/" element={<Navigate to="/new-reservation" replace />} />
@@ -36,6 +38,7 @@ function App() {
 
             <Route path="*" element={<Navigate to="/new-reservation" replace />} />
           </Routes>
+           </div>
         </BrowserRouter>
       </ReservationDraftProvider>
     </AuthProvider>

@@ -1,9 +1,9 @@
 @reference "tailwindcss";
 
 .wrapper {
-  @apply min-h-screen flex items-center justify-center bg-gray-50;
+  @apply flex items-center justify-center;
+  min-height: calc(100vh - 56px);
 }
-
 .card {
   @apply bg-white border border-gray-200 rounded-xl p-8 w-[320px];
 }

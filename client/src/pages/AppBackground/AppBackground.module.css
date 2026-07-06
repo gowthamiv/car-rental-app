@@ -1,0 +1,40 @@
+@reference "tailwindcss";
+
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: linear-gradient(180deg, #eef4fb 0%, #e5eefa 100%);
+}
+
+.decorCar {
+  position: absolute;
+  color: #c3d0e5;
+  opacity: 0.35;
+}
+
+.roadStripe {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: #dde1e7;
+  opacity: 0.6;
+}
+
+.roadLine {
+  position: absolute;
+  bottom: 33px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: repeating-linear-gradient(
+    90deg,
+    #ffffff99 0px,
+    #ffffff99 36px,
+    transparent 36px,
+    transparent 64px
+  );
+}
