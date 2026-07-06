@@ -75,3 +75,7 @@ Open **http://localhost:5173** in your browser. Both the backend (port 4000) and
 
 - Data is stored **in-memory only** — restarting the backend clears all reservations and users.
 - Refreshing the browser logs you out (session token lives only in memory, not persisted).
+
+## Documentation
+- [Architecture](docs/architecture.md) — folder structure, layers, API contract, request flow
+- [Design Decisions](docs/design-decisions.md) — patterns and rationale, scope decisions, assumptions
