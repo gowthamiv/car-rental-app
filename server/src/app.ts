@@ -1,6 +1,8 @@
 
 import express from 'express';
 import cors from 'cors';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 
 import { config } from './config/config';
 
@@ -77,18 +79,34 @@ const errorHandler = makeErrorHandler(logger);
 const authController = makeAuthController(otpService, jwtService, userService, logger);
 const reservationController = makeReservationController(reservationService);
 
+// Rate limiters
+const generalLimiter = rateLimit({
+  windowMs: 60 * 1000,       // 1 minute
+  max: 30,                    // 30 requests per IP per minute — generous backstop for all /api routes
+  message: { error: 'Too many requests. Please slow down.' },
+});
+
+const otpLimiter = rateLimit({
+  windowMs: 5 * 60 * 1000,    // 5 minutes
+  max: 5,                      // 5 attempts per IP per window — protects OTP from brute-forcing
+  message: { error: 'Too many attempts. Please try again later.' },
+});
+
 // ─────────────────────────────────────────────────────────────
 // 2. Express app setup
 // ─────────────────────────────────────────────────────────────
 
 const app = express();
 
+app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
+
+app.use('/api', generalLimiter); // applies to every /api/* route as a baseline
 
 app.use('/api/auth', makeAuthRoutes(authController));
 app.post('/api/options', validate(optionsSchema), reservationController.getOptions);
