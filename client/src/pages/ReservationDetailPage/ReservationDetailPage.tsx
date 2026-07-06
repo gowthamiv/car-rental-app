@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
+// src/pages/ReservationDetailPage/ReservationDetailPage.tsx
+import { useEffect, useState, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useReservations } from '../../hooks/useReservations';
 import { ALL_CATEGORIES, getCategoryConfig } from '../../constants/category.config';
 import type { Reservation, VehicleCategory } from '../../types/reservation.types';
 import { extractErrorMessage } from '../../utils/errorUtil';
+import { calculateDays, calculatePrice } from '../../utils/pricing';
 import styles from './ReservationDetailPage.module.css';
 import { formatCurrency } from '../../utils/format';
 
@@ -34,8 +36,18 @@ export function ReservationDetailPage() {
       .finally(() => setLoading(false));
   }, [id]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Live-recalculated price, based on current form field values — updates on every change
+  const livePrice = useMemo(() => {
+    if (!category || !startDate || !endDate) return null;
+    const days = calculateDays(startDate, endDate);
+    if (days <= 0) return null;
+    return calculatePrice(category, days, dailyMileage);
+  }, [category, startDate, endDate, dailyMileage]);
+
   if (loading) return <p className="text-center py-10 text-gray-500">Loading…</p>;
   if (!reservation || !id) return <p className="text-center py-10 text-gray-500">Reservation not found.</p>;
+
+  const hasChanges = livePrice !== null && livePrice !== reservation.totalPrice;
 
   const handleSave = async () => {
     setSaving(true);
@@ -96,11 +108,18 @@ export function ReservationDetailPage() {
         </div>
 
         <div className={styles.priceBox}>
-          <p className="text-sm text-gray-500">Current total</p>
-          <p className={styles.priceNew}>{formatCurrency(reservation.totalPrice)}</p>
+          <div>
+            {hasChanges && (
+              <p className="text-xs text-gray-400 line-through">${reservation.totalPrice.toFixed(2)}</p>
+            )}
+            <p className="text-sm text-gray-500">{hasChanges ? 'Updated total' : 'Current total'}</p>
+          </div>
+          <p className={styles.priceNew}>
+           {formatCurrency(livePrice ?? reservation.totalPrice)}
+          </p>
         </div>
 
-        {error && <p className={styles.errorText} role="alert" aria-live="polite">{error}</p>}
+        {error && <p className={styles.errorText}>{error}</p>}
 
         <div className={styles.actions}>
           <button className={styles.buttonSecondary} onClick={handleCancel} disabled={saving}>Cancel</button>
@@ -108,7 +127,6 @@ export function ReservationDetailPage() {
             {saving ? 'Saving…' : 'Save changes'}
           </button>
         </div>
-
       </div>
     </div>
   );
