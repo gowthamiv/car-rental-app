@@ -6,6 +6,7 @@ import { useReservations } from '../../hooks/useReservations';
 import { getCategoryConfig } from '../../constants/category.config';
 import { extractErrorMessage } from '../../utils/errorUtil';
 import styles from './MyReservationsPage.module.css';
+import { formatCurrency } from '../../utils/format';
 
 export function MyReservationsPage() {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ export function MyReservationsPage() {
       </div>
 
       {loading && <p className={styles.emptyState}>Loading…</p>}
-      {error && <p className={styles.emptyState}>{error}</p>}
+      {error && <p className={styles.emptyState} role="alert" aria-live="polite">{error}</p>}
       {actionError && <p className={styles.errorText}>{actionError}</p>}
 
       {!loading && !error && reservations.length === 0 && (
@@ -67,7 +68,7 @@ export function MyReservationsPage() {
                 </div>
 
                 <div className={styles.rowRight}>
-                  <p className={styles.price}>${reservation.totalPrice.toFixed(2)}</p>
+                  <p className={styles.price}>{formatCurrency(reservation.totalPrice)}</p>
                   <span className={isActive ? styles.statusActive : styles.statusCancelled}>
                     {isActive ? 'Active' : 'Cancelled'}
                   </span>

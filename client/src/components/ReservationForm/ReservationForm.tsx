@@ -3,6 +3,7 @@ import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { getCategoryConfig } from '../../constants/category.config';
 import styles from './ReservationForm.module.css';
+import { formatCurrency } from '../../utils/format';
 
 interface ReservationFormValues {
   fullName: string;
@@ -58,7 +59,7 @@ export function ReservationForm({
         <p className="text-sm text-gray-500 mt-2">
           {startDate} – {endDate} · {days} day{days !== 1 ? 's' : ''}
         </p>
-        <p className={styles.summaryPrice}>${totalPrice.toFixed(2)} total</p>
+        <p className={styles.summaryPrice}>{formatCurrency(totalPrice)} total</p>
       </div>
 
       <div className={styles.field}>

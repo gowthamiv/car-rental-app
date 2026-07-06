@@ -54,7 +54,7 @@ export function ReserveFormPage() {
         onBack={() => navigate('/options', { state: { startDate: draft.startDate, endDate: draft.endDate, dailyMileage: draft.dailyMileage } })}
         submitting={submitting}
       />
-      {error && <p className="text-sm text-red-500">{error}</p>}
+      {error && <p className="text-sm text-red-500" role="alert" aria-live="polite">{error}</p>}
     </div>
   );
 }

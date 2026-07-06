@@ -2,6 +2,7 @@ import { Car, CarFront, Bus, Truck, AlertCircle } from 'lucide-react';
 import type { PricingOption } from '../../types/reservation.types';
 import { getCategoryConfig } from '../../constants/category.config';
 import styles from './CategoryOptionCard.module.css';
+import { formatCurrency } from '../../utils/format';
 
 const ICONS = { car: Car, 'car-front': CarFront, bus: Bus, truck: Truck };
 
@@ -29,7 +30,7 @@ export function CategoryOptionCard({ option, days, isBestValue, onSelect }: Cate
         <span className="text-xs text-blue-600 font-medium mt-2">Best value</span>
       )}
 
-      <p className={styles.price}>${option.totalPrice.toFixed(2)}</p>
+      <p className={styles.price}>{formatCurrency(option.totalPrice)}</p>
       <p className={styles.priceDetail}>{days} day{days !== 1 ? 's' : ''}</p>
 
       <p className={styles.availability}>

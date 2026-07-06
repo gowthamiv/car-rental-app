@@ -50,7 +50,7 @@ export function Header() {
               </div>
               <span className={styles.mobileNumber}>{mobileNumber}</span>
             </div>
-            <button className={styles.logoutButton} onClick={handleLogout}>
+            <button className={styles.logoutButton} onClick={handleLogout} aria-label="Log out">
               <LogOut size={14} /> Log out
             </button>
           </>

@@ -90,7 +90,7 @@ export function OtpVerifyPage() {
           {loading ? 'Verifying…' : 'Verify and continue'}
         </button>
 
-        {error && <p className={styles.errorText}>{error}</p>}
+        {error && <p className={styles.errorText} role="alert" aria-live="polite">{error}</p>}
 
         <button
           type="button"

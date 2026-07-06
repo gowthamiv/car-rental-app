@@ -52,7 +52,7 @@ export function LoginPage() {
           {loading ? 'Sending…' : 'Send code'}
         </button>
 
-        {error && <p className={styles.errorText}>{error}</p>}
+        {error && <p className={styles.errorText} role="alert" aria-live="polite">{error}</p>}
       </form>
     </div>
   );

@@ -64,7 +64,7 @@ export function NewReservationPage() {
           />
         </div>
 
-        {error && <p className={styles.errorText}>{error}</p>}
+        {error && <p className={styles.errorText} role="alert" aria-live="polite">{error}</p>}
 
         <button type="submit" className={styles.button}>See options</button>
       </form>

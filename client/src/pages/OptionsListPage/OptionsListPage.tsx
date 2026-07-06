@@ -103,7 +103,7 @@ export function OptionsListPage() {
         <button type="submit" className={styles.updateButton}>Update options</button>
       </form>
 
-      {error && <p className={styles.errorText}>{error}</p>}
+      {error && <p className={styles.errorText} role="alert" aria-live="polite">{error}</p>}
 
       {loading && <p className={styles.emptyState}>Loading options…</p>}
 

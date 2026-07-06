@@ -5,6 +5,7 @@ import { ALL_CATEGORIES, getCategoryConfig } from '../../constants/category.conf
 import type { Reservation, VehicleCategory } from '../../types/reservation.types';
 import { extractErrorMessage } from '../../utils/errorUtil';
 import styles from './ReservationDetailPage.module.css';
+import { formatCurrency } from '../../utils/format';
 
 export function ReservationDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -96,10 +97,10 @@ export function ReservationDetailPage() {
 
         <div className={styles.priceBox}>
           <p className="text-sm text-gray-500">Current total</p>
-          <p className={styles.priceNew}>${reservation.totalPrice.toFixed(2)}</p>
+          <p className={styles.priceNew}>{formatCurrency(reservation.totalPrice)}</p>
         </div>
 
-        {error && <p className={styles.errorText}>{error}</p>}
+        {error && <p className={styles.errorText} role="alert" aria-live="polite">{error}</p>}
 
         <div className={styles.actions}>
           <button className={styles.buttonSecondary} onClick={handleCancel} disabled={saving}>Cancel</button>

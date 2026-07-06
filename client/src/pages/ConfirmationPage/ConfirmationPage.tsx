@@ -6,6 +6,7 @@ import { getReservationById } from '../../api/reservationApi';
 import { getCategoryConfig } from '../../constants/category.config';
 import type { Reservation } from '../../types/reservation.types';
 import styles from './ConfirmationPage.module.css';
+import { formatCurrency } from '../../utils/format';
 
 function calculateDays(startDate: string, endDate: string): number {
   const msPerDay = 86_400_000;
@@ -59,7 +60,7 @@ export function ConfirmationPage() {
 
         <div className={styles.totalRow}>
           <p className="text-sm text-gray-500">Total</p>
-          <p className={styles.totalPrice}>${reservation.totalPrice.toFixed(2)}</p>
+          <p className={styles.totalPrice}>{formatCurrency(reservation.totalPrice)}</p>
         </div>
 
         <div className={styles.actions}>
