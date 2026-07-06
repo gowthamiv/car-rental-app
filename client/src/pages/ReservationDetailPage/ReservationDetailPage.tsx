@@ -42,6 +42,7 @@ export function ReservationDetailPage() {
     try {
       const updated = await modify(id, { category: category || undefined, startDate, endDate, dailyMileage });
       setReservation(updated);
+      navigate('/reservations');
     } catch (err) {
       setError(extractErrorMessage(err));
     } finally {
@@ -49,25 +50,13 @@ export function ReservationDetailPage() {
     }
   };
 
-  const handleDiscard = () => {
+  const handleCancel = () => {
     setCategory(reservation.category);
     setStartDate(reservation.startDate);
     setEndDate(reservation.endDate);
     setDailyMileage(reservation.dailyMileage ?? 0);
     setError(null);
-  };
-
-  const handleCancel = async () => {
-    if (!confirm('Cancel this reservation? This cannot be undone.')) return;
-    setSaving(true);
-    setError(null);
-    try {
-      await cancel(id);
-      navigate('/reservations');
-    } catch (err) {
-      setError(extractErrorMessage(err));
-      setSaving(false);
-    }
+    navigate('/reservations');
   };
 
   return (
@@ -113,15 +102,12 @@ export function ReservationDetailPage() {
         {error && <p className={styles.errorText}>{error}</p>}
 
         <div className={styles.actions}>
-          <button className={styles.buttonSecondary} onClick={handleDiscard} disabled={saving}>Discard changes</button>
+          <button className={styles.buttonSecondary} onClick={handleCancel} disabled={saving}>Cancel</button>
           <button className={styles.buttonPrimary} onClick={handleSave} disabled={saving}>
             {saving ? 'Saving…' : 'Save changes'}
           </button>
         </div>
 
-        <button className={styles.cancelButton} onClick={handleCancel} disabled={saving}>
-          Cancel reservation
-        </button>
       </div>
     </div>
   );
