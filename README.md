@@ -1,71 +1,77 @@
-Car Rental Application
+# Car Rental App — Local Setup
 
-A full-stack car rental reservation system built with React + TypeScript (frontend)
-and Node.js + Express + TypeScript (backend), implementing the 4 core operations —
-reserve, modify, cancel, and get pricing options — across 4 vehicle categories
-(Sedan, SUV, Van, Pickup Truck).
+Repository: https://github.com/gowthamiv/car-rental-app
 
-Architecture
+A full-stack car rental reservation app — React + TypeScript frontend, Node.js + Express + TypeScript backend.
 
-See docs/architecture.md for the full design document,
-including design patterns used (Strategy, Factory, Repository, Facade, constructor
-Dependency Injection, rich domain model) and all scope decisions confirmed with
-the interviewer.
+## Prerequisites
 
-Prerequisites
+- **Node.js v24.x** (Active LTS)
+- npm (bundled with Node)
+- Git
 
+## 1. Clone the repository
 
-Node.js v24.x (Active LTS)
-npm (bundled with Node)
-Git
+```bash
+git clone https://github.com/gowthamiv/car-rental-app.git
+cd car-rental-app
+```
 
+## 2. Backend setup
 
-Project structure
-
-car-rental-app/
-├── server/          # Node.js + Express + TypeScript backend
-├── client/          # React + TypeScript frontend (Vite)
-├── docs/
-│   └── architecture.md
-└── README.md
-
-Setup & run — backend
-
-bashcd server
+```bash
+cd server
 npm install
+```
 
-Create a .env file in server/ (copy from .env.example if present):
-
+Create a `.env` file inside `server/`:
+```
 PORT=4000
 JWT_SECRET=your-local-dev-secret
 JWT_EXPIRES_IN_SECONDS=7200
 OTP_TTL_MS=300000
 NODE_ENV=development
+```
 
 Start the backend:
+```bash
+npm run dev
+```
+Runs on **http://localhost:4000**. Verify it's up:
+```bash
+curl http://localhost:4000/health
+```
 
-bashnpm run dev
+## 3. Frontend setup
 
-Runs on http://localhost:4000. Confirm it's up:
-
-bashcurl http://localhost:4000/health
-
-Setup & run — frontend
-
-Open a second terminal:
-
-bashcd client
+Open a **second terminal**:
+```bash
+cd client
 npm install
+```
 
-Create a .env file in client/:
-
+Create a `.env` file inside `client/`:
+```
 VITE_API_BASE_URL=http://localhost:4000/api
+```
 
 Start the frontend:
+```bash
+npm run dev
+```
+Runs on **http://localhost:5173**.
 
-bashnpm run dev
+## 4. Use the app
 
-Runs on http://localhost:5173. Both servers must be running simultaneously
-for the app to work end to end.
+Open **http://localhost:5173** in your browser. Both the backend (port 4000) and frontend (port 5173) must be running at the same time.
 
-Restarting the backend wipes everything — every reservation, every user, back to just the seeded inventory counts. This is expected behavior, not a bug, and it's already documented in your README's "Known limitations" section
+1. Log in with any mobile number
+2. The OTP is shown directly on screen in dev mode (no real SMS is sent) — auto-filled for convenience
+3. Verify, then set a date range on **New Reservation**
+4. Compare categories on **Get Options**, select one, and confirm on **Reserve**
+5. Manage bookings from **My Reservations**
+
+## Notes
+
+- Data is stored **in-memory only** — restarting the backend clears all reservations and users.
+- Refreshing the browser logs you out (session token lives only in memory, not persisted).
