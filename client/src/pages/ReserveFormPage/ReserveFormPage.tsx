@@ -14,7 +14,7 @@ function calculateDays(startDate: string, endDate: string): number {
 
 export function ReserveFormPage() {
   const navigate = useNavigate();
-  const { draft, clearDraft } = useReservationDraft();
+  const { draft } = useReservationDraft();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -33,7 +33,6 @@ export function ReserveFormPage() {
         endDate: draft.endDate!,
         dailyMileage: draft.dailyMileage,
       });
-      clearDraft();
       navigate(`/confirmation/${reservation.id}`, { replace: true });
     } catch (err) {
       setError(extractErrorMessage(err));

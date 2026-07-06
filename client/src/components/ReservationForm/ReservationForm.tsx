@@ -1,6 +1,6 @@
 // src/components/ReservationForm.tsx
 import { useState } from 'react';
-import type { FormEvent } from 'react';
+import type { SubmitEvent } from 'react';
 import { getCategoryConfig } from '../../constants/category.config';
 import styles from './ReservationForm.module.css';
 import { formatCurrency } from '../../utils/format';
@@ -36,7 +36,7 @@ export function ReservationForm({
   const [values, setValues] = useState<ReservationFormValues>({ fullName: '', licenseNumber: '', email: '' });
   const [emailError, setEmailError] = useState<string | null>(null);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e: SubmitEvent) => {
     e.preventDefault();
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
