@@ -60,10 +60,30 @@
   @apply bg-gray-100 text-gray-500 text-xs px-3 py-1 rounded-md;
 }
 
-.linkButton {
-  @apply text-sm text-blue-600 bg-transparent border-none;
-}
-
 .emptyState {
   @apply text-sm text-gray-500 text-center py-10;
+}
+
+.cancelLinkButton:disabled {
+  @apply text-gray-300 cursor-not-allowed;
+}
+
+.errorText {
+  @apply text-sm text-red-500 mb-3;
+}
+
+.modifyButton {
+  @apply text-sm text-gray-700 border border-gray-300 rounded-md px-3 py-1.5 bg-white;
+}
+
+.modifyButton:disabled {
+  @apply text-gray-300 border-gray-200 cursor-not-allowed;
+}
+
+.cancelButton {
+  @apply text-sm text-red-500 border border-red-200 rounded-md px-3 py-1.5 bg-white;
+}
+
+.cancelButton:disabled {
+  @apply text-gray-300 border-gray-200 cursor-not-allowed;
 }
