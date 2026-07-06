@@ -216,6 +216,7 @@ client/src/
 │   └── ProtectedRoute/
 │       └── ProtectedRoute.tsx
 ├── pages/
+│   ├── AppBackground/
 │   ├── LoginPage/
 │   ├── OtpVerifyPage/
 │   ├── NewReservationPage/
@@ -291,8 +292,3 @@ Full rationale for each — see [design-decisions.md](./design-decisions.md).
 - Auth token lives only in React memory — refreshing the browser logs the user out
 - OTP delivery is simulated, not sent via a real SMS gateway
 - Renter details collected on the Reserve form are not persisted server-side
-
-## 9. Background Theme
-- Added a new Shared Component for Sharing the background across the application
-├── pages/
-    ├── AppBackground (has AppBackground.tsx, AppBackground.module.css)
