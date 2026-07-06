@@ -180,7 +180,114 @@ Response sent to client
 ```
 - Availability is calculated based on overlapping slots of reservations
 - A reservation being edited doesn't count as a conflict against its own current slot.
+```
 
 ---
 
 ## 5. Frontend Structure
+
+```
+client/src/
+├── api/
+│   ├── client.ts               # Axios instance + interceptors (auth token, 401 handling)
+│   ├── authApi.ts
+│   └── reservationApi.ts
+├── hooks/
+│   ├── useAuth.ts
+│   ├── useReservationDraft.ts
+│   ├── usePricing.ts
+│   ├── useReservations.ts
+│   └── useDebouncedValue.ts
+├── context/
+│   ├── AuthContext.context.ts
+│   ├── AuthProvider.tsx
+│   ├── ReservationDraftContext.context.ts
+│   └── ReservationDraftProvider.tsx
+├── components/
+│   ├── Header/
+│   │   ├── Header.tsx
+│   │   └── Header.module.css
+│   ├── CategoryOptionCard/
+│   │   ├── CategoryOptionCard.tsx
+│   │   └── CategoryOptionCard.module.css
+│   ├── ReservationForm/
+│   │   ├── ReservationForm.tsx
+│   │   └── ReservationForm.module.css
+│   └── ProtectedRoute/
+│       └── ProtectedRoute.tsx
+├── pages/
+│   ├── LoginPage/
+│   ├── OtpVerifyPage/
+│   ├── NewReservationPage/
+│   ├── OptionsListPage/
+│   ├── ReserveFormPage/
+│   ├── ConfirmationPage/
+│   ├── MyReservationsPage/
+│   └── ReservationDetailPage/
+│       (each folder: PageName.tsx + PageName.module.css)
+├── constants/
+│   └── category.config.ts
+├── types/
+│   ├── reservation.types.ts
+│   └── auth.types.ts
+├── utils/
+│   ├── errorUtil.ts
+│   ├── pricing.ts
+│   └── format.ts
+├── index.css                     # @import "tailwindcss";
+└── App.tsx                       # routes, providers, ProtectedRoute wiring
+```
+
+### 5.1 Routing table
+
+| Path | Component | Protected? |
+|---|---|---|
+| `/login` | LoginPage | No |
+| `/verify-otp` | OtpVerifyPage | No |
+| `/new-reservation` | NewReservationPage | Yes |
+| `/options` | OptionsListPage | Yes |
+| `/reserve` | ReserveFormPage | Yes |
+| `/confirmation/:id` | ConfirmationPage | Yes |
+| `/reservations` | MyReservationsPage | Yes |
+| `/reservations/:id` | ReservationDetailPage | Yes |
+
+### 5.2 End-to-end user flow
+
+1. **Login** → mobile number → OTP requested (auto-filled in dev mode) → verify → JWT stored in `AuthContext`
+2. **New Reservation** → dates + estimated mileage → navigates to Options with router state
+3. **Get Options** → `usePricing()` fetches (debounced on mileage changes) → cards sorted ascending by price, "Best value" highlighted, unavailable categories disabled
+4. **Select category** → written to `ReservationDraftContext` → navigates to Reserve
+5. **Reserve** → confirm renter details (confirmation page)→ **click view reservations which navigates directly to My Reservations**
+6. **My Reservations** → list with inline **Modify** and **Cancel** buttons per active row
+7. **Modify** (`ReservationDetailPage`) → live price recalculation and live date validation as fields change; Save/Cancel both return to My Reservations
+8. **Cancel** → confirm dialog → cancelled in place (list, not detail page) or via detail page
+
+## 6. Design Patterns Applied (Backend)
+
+| Pattern | Applied to |
+|---|---|
+| Strategy | Pricing per category |
+| Factory | `PricingFactory` |
+| Repository (interface + implementation) | Data access layer |
+| Facade | `ReservationService` |
+| Constructor Dependency Injection | All services, no Singletons |
+| Rich domain model | `Reservation` class |
+| Custom exception hierarchy | `errors/` + global `errorHandler` |
+
+Full rationale for each — see [design-decisions.md](./design-decisions.md).
+
+## 7. Non-Functional Additions
+
+| Area | Implementation |
+|---|---|
+| Localization | `Intl.NumberFormat` / `Intl.DateTimeFormat` via `utils/format.ts` |
+| Accessibility | `aria-label`, `role="alert"` + `aria-live` |
+| Security | `helmet()`, OTP + general rate limiting, Zod validation, JWT auth, ownership checks, dev-only error detail |
+
+
+## 8. Known Limitations
+
+- All data is in-memory and resets on server restart
+- Auth token lives only in React memory — refreshing the browser logs the user out
+- OTP delivery is simulated, not sent via a real SMS gateway
+- Renter details collected on the Reserve form are not persisted server-side
