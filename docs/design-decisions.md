@@ -196,3 +196,6 @@ left as an implicit convention.
 - As In-memory DB is used, the data gets erased after server restart and user logsout on reload
 - Styles like onFocus, hover custom styles, themes can be done as extension
 - Performance metrics like code-splitting and lazy loading can be done as the assignment grows in size
+
+## 15. Realtime Performance tab reading in Local
+![alt text](image.png)
