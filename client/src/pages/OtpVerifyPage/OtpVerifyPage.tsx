@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { FormEvent } from 'react';
+import type { SubmitEvent } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { verifyOtp, requestOtp } from '../../api/authApi';
 import { useAuth } from '../../hooks/useAuth';
@@ -31,7 +31,7 @@ export function OtpVerifyPage() {
     return null;
   }
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: SubmitEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);

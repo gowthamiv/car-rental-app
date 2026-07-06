@@ -1,6 +1,6 @@
 // src/pages/OptionsListPage/OptionsListPage.tsx
 import { useEffect, useState } from 'react';
-import type { FormEvent } from 'react';
+import type { SubmitEvent } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { usePricing } from '../../hooks/usePricing';
 import { useReservationDraft } from '../../hooks/useReservationDraft';
@@ -44,7 +44,7 @@ export function OptionsListPage() {
     }
   }, [startDate, endDate, dailyMileage]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const handleUpdate = (e: FormEvent) => {
+  const handleUpdate = (e: SubmitEvent) => {
     e.preventDefault();
     fetchOptions({ startDate, endDate, dailyMileage });
   };

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { FormEvent } from 'react';
+import type { SubmitEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './NewReservationPage.module.css';
 
@@ -10,7 +10,7 @@ export function NewReservationPage() {
   const [dailyMileage, setDailyMileage] = useState(0);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e: SubmitEvent) => {
     e.preventDefault();
 
     if (new Date(endDate) <= new Date(startDate)) {

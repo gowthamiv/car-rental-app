@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { FormEvent } from 'react';
+import type { SubmitEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Car } from 'lucide-react';
 import { requestOtp } from '../../api/authApi';
@@ -12,7 +12,7 @@ export function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: SubmitEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
