@@ -20,7 +20,7 @@ export function Header() {
           <div className={styles.logoCircle}>
             <Car size={16} className="text-blue-600" />
           </div>
-          <span className={styles.brandName}>Drive Me</span>
+          <span className={styles.brandName}>DriveEasy</span>
         </Link>
 
         {isAuthenticated && (
