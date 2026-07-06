@@ -67,3 +67,5 @@ bashnpm run dev
 
 Runs on http://localhost:5173. Both servers must be running simultaneously
 for the app to work end to end.
+
+Restarting the backend wipes everything — every reservation, every user, back to just the seeded inventory counts. This is expected behavior, not a bug, and it's already documented in your README's "Known limitations" section

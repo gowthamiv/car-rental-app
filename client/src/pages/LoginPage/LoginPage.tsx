@@ -18,8 +18,9 @@ export function LoginPage() {
     setError(null);
 
     try {
-      await requestOtp({ mobileNumber });
-      navigate('/verify-otp', { state: { mobileNumber } });
+      const result = await requestOtp({ mobileNumber });
+      // result.otp only exists in dev mode (config.isDev on the backend) — undefined in production
+      navigate('/verify-otp', { state: { mobileNumber, otp: result.otp } });
     } catch (err) {
       setError(extractErrorMessage(err));
     } finally {

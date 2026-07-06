@@ -8,6 +8,7 @@ import styles from './OtpVerifyPage.module.css'; // reuses the same card/form st
 
 interface LocationState {
   mobileNumber?: string;
+  otp?: string;
   from?: { pathname: string };
 }
 
@@ -19,7 +20,7 @@ export function OtpVerifyPage() {
   const state = (location.state as LocationState) ?? {};
   const mobileNumber = state.mobileNumber;
 
-  const [otp, setOtp] = useState('');
+  const [otp, setOtp] = useState(state.otp ?? '');
   const [loading, setLoading] = useState(false);
   const [resending, setResending] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -51,7 +52,8 @@ export function OtpVerifyPage() {
     setResending(true);
     setError(null);
     try {
-      await requestOtp({ mobileNumber });
+      const result = await requestOtp({ mobileNumber });
+      if (result.otp) setOtp(result.otp);
     } catch (err) {
       setError(extractErrorMessage(err));
     } finally {
@@ -64,6 +66,12 @@ export function OtpVerifyPage() {
       <form className={styles.card} onSubmit={handleSubmit}>
         <p className={styles.title}>Enter code</p>
         <p className={styles.subtitle}>Sent to {mobileNumber}</p>
+
+        {state.otp && (
+        <p className="text-xs text-amber-600 text-center mb-2">
+          Dev mode: code pre-filled automatically
+        </p>
+        )}
 
         <label className={styles.label} htmlFor="otp">6-digit code</label>
         <input
